@@ -8,8 +8,9 @@ const stripe = require("stripe")(stripeSecret);
 const app = express();
 app.use(
   cors({
-    origin: "https://starlit-sprinkles-eab210.netlify.app/",
+    origin: "https://starlit-sprinkles-eab210.netlify.app",
     methods: ["GET", "POST"],
+    credentials: true,
   })
 );
 // recommended by stripe
