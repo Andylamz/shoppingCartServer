@@ -6,7 +6,12 @@ const cors = require("cors");
 const stripe = require("stripe")(stripeSecret);
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://starlit-sprinkles-eab210.netlify.app/",
+    methods: ["GET", "POST"],
+  })
+);
 // recommended by stripe
 app.use(express.static("public"));
 app.use(express.json());
@@ -22,8 +27,8 @@ app.post("/checkout", async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     line_items: lineItems,
     mode: "payment",
-    success_url: "http://localhost:3000/success",
-    cancel_url: "http://localhost:3000/cancel",
+    success_url: "https://shoppingcartserver-production.up.railway.app/success",
+    cancel_url: "https://shoppingcartserver-production.up.railway.app/cancel",
   });
 
   res.send(
